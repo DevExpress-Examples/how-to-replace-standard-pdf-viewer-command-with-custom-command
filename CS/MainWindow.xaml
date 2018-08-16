@@ -1,0 +1,27 @@
+﻿<Window 
+    x:Class="DXSample.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:pdfViewer="http://schemas.devexpress.com/winfx/2008/xaml/pdf"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:DXSample"
+    Name="win" 
+    Title="MainWindow" 
+    Height="350" 
+    Width="525" >
+
+    <Grid>
+        <pdfViewer:PdfViewerControl   DocumentSource="{Binding Path}" >
+            <pdfViewer:PdfViewerControl.CommandProvider>
+                <local:CustomPdfCommandProvider>
+                    <pdfViewer:PdfCommandProvider.RibbonActions>
+                        <dxb:InsertAction  ContainerName="{x:Static pdfViewer:DefaultPdfBarManagerItemNames.NavigationRibbonGroup}" 
+                                           ElementName="{x:Static pdfViewer:DefaultPdfBarManagerItemNames.NextPage}" />
+                        <dxb:InsertAction  ContainerName="{x:Static pdfViewer:DefaultPdfBarManagerItemNames.NavigationRibbonGroup}"
+                                           ElementName="{x:Static pdfViewer:DefaultPdfBarManagerItemNames.PreviousPage}" />
+                    </pdfViewer:PdfCommandProvider.RibbonActions>
+                </local:CustomPdfCommandProvider>
+            </pdfViewer:PdfViewerControl.CommandProvider>
+        </pdfViewer:PdfViewerControl>
+    </Grid>
+</Window>
