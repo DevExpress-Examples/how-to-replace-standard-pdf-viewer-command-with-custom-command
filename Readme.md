@@ -12,4 +12,11 @@ Follow the steps below.
 
 3. Use the created **CustomPdfCommandProvider** to substitute the default command provider, for example, to add the built-in NextPage item to PdfViewerControl's Ribbon.
 
-<br/>
+See the following files for implementation details:
+
+CS | VB
+------------ | -------------
+[MainWindow.xaml](./CS/MainWindow.xaml) | [MainWindow.xaml](./VB/MainWindow.xaml)
+[MainWindow.xaml.cs](./CS/MainWindow.xaml.cs) | [MainWindow.xaml.vb](./VB/MainWindow.xaml.vb)
+[**CustomNextPageCommand.cs**](./CS/CustomNextPageCommand.cs) | [**CustomNextPageCommand.vb**](./VB/CustomNextPageCommand.vb)
+[**CustomPreviousPageCommand.cs**](./CS/CustomPreviousPageCommand.cs) | [**CustomPreviousPageCommand.vb**](./VB/CustomPreviousPageCommand.vb)
