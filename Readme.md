@@ -8,9 +8,9 @@ Follow the steps below.
 
 1. Create a custom command provider class inherited from the <a href="https://documentation.devexpress.com/WPF/DevExpress.Xpf.PdfViewer.PdfCommandProvider.class">PdfCommandProvider</a>  class. You need to override the required members (e.g., the **ZoomInCommandInternal** property) to create an instance of the **DelegateCommand** class.  
 
-The delegate command constructor accepts **Execute** and **CanExecute** delegates (in this example **ZoomIn** and **CanZoomIn** delegates). The delegate command calls these delegates when the command's logic is invoked.
+The delegate command constructor accepts **ZoomIn** and **CanZoomIn** delegates. The delegate command calls these delegates when the command's logic is invoked.
 
-2. Implement the command logic in the **Execute** and **CanExecute** methods (in this example **ZoomIn** and **CanZoomIn** methods).
+2. Implement the command logic in the **ZoomIn** and **CanZoomIn** methods.
 
 3. Use the created **CustomPdfCommandProvider** to substitute the default command provider.
 
