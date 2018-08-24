@@ -1,6 +1,6 @@
 #  How to replace a standard PDF Viewer control command with a custom command
 
-This example shows how to modify the existing PDF Viewer **ZoomIn**/**ZoomOut** command functionality to zoom to a custom zoom factor.
+This example shows how to modify the existing PDF Viewer command functionality to zoom to a custom zoom factor.
 
 All commands in the PDF Viewer are created using a command provider represented by the <a href="https://documentation.devexpress.com/WPF/DevExpress.Xpf.PdfViewer.PdfCommandProvider.class">PdfCommandProvider</a>  class. You can substitute the default command provider with its descendant to create a custom command in place of the default command.
 
