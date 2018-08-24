@@ -1,27 +1,32 @@
 ﻿<Window 
-    x:Class="DXSample.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
-    xmlns:pdfViewer="http://schemas.devexpress.com/winfx/2008/xaml/pdf"
+    x:Class="DXSample.MainWindow" 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars" 
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm" 
+    xmlns:pdfViewer="http://schemas.devexpress.com/winfx/2008/xaml/pdf"
+    xmlns:dxdv="http://schemas.devexpress.com/winfx/2008/xaml/documentviewer"
+    xmlns:themes="http://schemas.devexpress.com/winfx/2008/xaml/pdf/themekeys"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"  
     xmlns:local="clr-namespace:DXSample"
     Name="win" 
     Title="MainWindow" 
     Height="350" 
     Width="525" >
-
+  
     <Grid>
-        <pdfViewer:PdfViewerControl   DocumentSource="{Binding Path}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+     
+        <pdfViewer:PdfViewerControl x:Name="pdfViewer" DocumentSource="{Binding Path}" >
+          
             <pdfViewer:PdfViewerControl.CommandProvider>
-                <local:CustomPdfCommandProvider>
-                    <pdfViewer:PdfCommandProvider.RibbonActions>
-                        <dxb:InsertAction  ContainerName="{x:Static pdfViewer:DefaultPdfBarManagerItemNames.NavigationRibbonGroup}" 
-                                           ElementName="{x:Static pdfViewer:DefaultPdfBarManagerItemNames.NextPage}" />
-                        <dxb:InsertAction  ContainerName="{x:Static pdfViewer:DefaultPdfBarManagerItemNames.NavigationRibbonGroup}"
-                                           ElementName="{x:Static pdfViewer:DefaultPdfBarManagerItemNames.PreviousPage}" />
-                    </pdfViewer:PdfCommandProvider.RibbonActions>
-                </local:CustomPdfCommandProvider>
+                <local:CustomPdfCommandProvider />
             </pdfViewer:PdfViewerControl.CommandProvider>
         </pdfViewer:PdfViewerControl>
+    
     </Grid>
 </Window>
