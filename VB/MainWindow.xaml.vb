@@ -1,8 +1,4 @@
-﻿Imports System.Collections.Generic
-Imports System.Collections.ObjectModel
-Imports System.Linq
-Imports System.Windows
-Imports System.Windows.Input
+﻿Imports System.Collections.ObjectModel
 Imports DevExpress.Mvvm
 Imports DevExpress.Xpf.DocumentViewer
 Imports DevExpress.Xpf.PdfViewer
@@ -17,6 +13,8 @@ Namespace DXSample
     End Class
 
     Public Class CustomPdfCommandProvider
+
+
         Inherits PdfCommandProvider
 
         Private ReadOnly factors As New List(Of Double) From {0.15, 0.3, 0.45, 1, 1.25, 1.5, 2, 5}
@@ -89,9 +87,12 @@ Namespace DXSample
         Protected Overrides Function CreateZoomModeAndZoomFactorItem(ByVal dllName As String) As ICommand
 
             Dim items = CreateZoomModeAndFactorsItems()
-            Dim setZoomModeAndFactor As CommandCheckItems = New CommandCheckItems With {.Caption = DocumentViewerLocalizer.GetString(DocumentViewerStringId.CommandZoomCaption), .Hint = DocumentViewerLocalizer.GetString(DocumentViewerStringId.CommandZoomDescription), .Group = DocumentViewerLocalizer.GetString(DocumentViewerStringId.ZoomRibbonGroupCaption), .Command = New DelegateCommand(Function()
-                
-            End Function, Function() items.Any(Function(x) x.CanExecute(Nothing))), .Items = items, .SmallGlyph = UriHelper.GetUri(dllName, "\Images\Zoom_16x16.png"), .LargeGlyph = UriHelper.GetUri(dllName, "\Images\Zoom_32x32.png")}
+            Dim setZoomModeAndFactor As CommandCheckItems = New CommandCheckItems With {.Caption = DocumentViewerLocalizer.GetString(DocumentViewerStringId.CommandZoomCaption),
+                .Hint = DocumentViewerLocalizer.GetString(DocumentViewerStringId.CommandZoomDescription),
+                .Group = DocumentViewerLocalizer.GetString(DocumentViewerStringId.ZoomRibbonGroupCaption),
+                .Command = New DelegateCommand(Function()
+                                               End Function, Function() items.Any(Function(x) x.CanExecute(Nothing))), .Items = items,
+            .SmallGlyph = UriHelper.GetUri(dllName, "\Images\Zoom_16x16.png"), .LargeGlyph = UriHelper.GetUri(dllName, "\Images\Zoom_32x32.png")}
             Return setZoomModeAndFactor
         End Function
 
@@ -99,81 +100,84 @@ Namespace DXSample
 
             Dim zoomModeAndFactorsItems As New ObservableCollection(Of CommandToggleButton)()
 
-            Dim setZoomFactorCommand As DelegateCommand(Of Double) = New DelegateCommand(Of Double)(Sub(x)
-                SetZoomFactorCommandInternal.Execute(x)
-                UpdateZoomCommand()
-            End Sub, x{get{Return SetZoomFactorCommandInternal.CanExecute(x))
-        End Function
-    End Class
+            Dim setZoomFactorCommand As DelegateCommand(Of Double) = New DelegateCommand(Of Double)(Function(x)
+                                                                                                        SetZoomFactorCommandInternal.Execute(x)
+                                                                                                        UpdateZoomCommand()
+                                                                                                    End Function, Function(x) SetZoomFactorCommandInternal.CanExecute(x))
 
+            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With {
+            .Caption = "15%",
+            .Command = New CommandWrapper(Function() setZoomFactorCommand),
+            .ZoomFactor = 0.15,
+            .GroupIndex = 1
+        })
 
-            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With { _
-                .Caption = "15%", _
-                .Command = New CommandWrapper(Function() setZoomFactorCommand), _
-                .ZoomFactor = 0.15, _
-                .GroupIndex = 1 _
-            })
+            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With {
+            .Caption = "30%",
+            .Command = New CommandWrapper(Function() (setZoomFactorCommand)),
+            .ZoomFactor = 0.3,
+            .GroupIndex = 1
+        })
 
-            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With { _
-                .Caption = "30%", _
-                .Command = New CommandWrapper(Function() (setZoomFactorCommand)), _
-                .ZoomFactor = 0.3, _
-                .GroupIndex = 1 _
-            })
+            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With {
+            .Caption = "45%",
+            .Command = New CommandWrapper(Function() setZoomFactorCommand),
+            .ZoomFactor = 0.45,
+            .GroupIndex = 1
+        })
 
-            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With { _
-                .Caption = "45%", _
-                .Command = New CommandWrapper(Function() setZoomFactorCommand), _
-                .ZoomFactor = 0.45, _
-                .GroupIndex = 1 _
-            })
+            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With {
+            .Caption = "100%",
+            .Command = New CommandWrapper(Function() setZoomFactorCommand),
+            .ZoomFactor = 1,
+            .GroupIndex = 1
+        })
 
-            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With { _
-                .Caption = "100%", _
-                .Command = New CommandWrapper(Function() setZoomFactorCommand), _
-                .ZoomFactor = 1, _
-                .GroupIndex = 1 _
-            })
+            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With {
+            .Caption = "125%",
+            .Command = New CommandWrapper(Function() setZoomFactorCommand),
+            .ZoomFactor = 1.25,
+            .GroupIndex = 1
+        })
 
-            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With { _
-                .Caption = "125%", _
-                .Command = New CommandWrapper(Function() setZoomFactorCommand), _
-                .ZoomFactor = 1.25, _
-                .GroupIndex = 1 _
-            })
+            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With {
+            .Caption = "150%",
+            .Command = New CommandWrapper(Function() setZoomFactorCommand),
+            .ZoomFactor = 1.5,
+            .GroupIndex = 1
+        })
 
-            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With { _
-                .Caption = "150%", _
-                .Command = New CommandWrapper(Function() setZoomFactorCommand), _
-                .ZoomFactor = 1.5, _
-                .GroupIndex = 1 _
-            })
+            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With {
+            .Caption = "200%",
+            .Command = New CommandWrapper(Function() setZoomFactorCommand),
+            .ZoomFactor = 2,
+            .GroupIndex = 1
+        })
 
-            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With { _
-                .Caption = "200%", _
-                .Command = New CommandWrapper(Function() setZoomFactorCommand), _
-                .ZoomFactor = 2, _
-                .GroupIndex = 1 _
-            })
-
-            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With { _
-                .Caption = "500%", _
-                .Command = New CommandWrapper(Function() setZoomFactorCommand), _
-                .ZoomFactor = 5, _
-                .GroupIndex = 1 _
-            })
+            zoomModeAndFactorsItems.Add(New CommandSetZoomFactorAndModeItem With {
+            .Caption = "500%",
+            .Command = New CommandWrapper(Function() setZoomFactorCommand),
+            .ZoomFactor = 5,
+            .GroupIndex = 1
+        })
             Return zoomModeAndFactorsItems
+        End Function
+
+        Protected Overrides Function UpdateZoomFactorCheckState(item As CommandToggleButton) As Boolean
+            Return MyBase.UpdateZoomFactorCheckState(item)
+        End Function
+
+        Private Sub UpdateZoomCommand()
+            Dim zoomCommand As CommandCheckItems = TryCast(zoomCommand, CommandCheckItems)
+            If zoomCommand Is Nothing Then
+            End If
+            Return
+        End Sub
+    End Class
 End Namespace
 
-'INSTANT VB TODO TASK: Local functions are not converted by Instant VB:
-'        void UpdateZoomCommand()
-'        {
-'            CommandCheckItems zoomCommand = TryCast(ZoomCommand, CommandCheckItems);
-'            if (zoomCommand == Nothing)
-'                Return;
-'            zoomCommand.UpdateCheckState(UpdateZoomFactorCheckState);
-'        }
-    }
-}
+
+
+
 
 
