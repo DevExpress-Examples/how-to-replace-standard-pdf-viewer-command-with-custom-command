@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXSample", "DXSample.csproj", "{214A381C-03A1-47C1-B4F2-8D56659E171F}"
+# Visual Studio 16
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXSample", "DXSample.Net5.csproj", "{214A381C-03A1-47C1-B4F2-8D56659E171F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
