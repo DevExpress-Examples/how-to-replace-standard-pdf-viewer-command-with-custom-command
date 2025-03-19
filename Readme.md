@@ -8,7 +8,10 @@
 
 This example modifies the existing PDF Viewer command to zoom a document to a custom zoom factor.
 
+![image](https://github.com/user-attachments/assets/4b70d9a1-9cc2-465d-abcb-49ca3f94b2c9)
+
 The [PdfCommandProvider](https://documentation.devexpress.com/WPF/DevExpress.Xpf.PdfViewer.PdfCommandProvider.class) class contains all commands in the PDF Viewer. You can create a descendant of the default command provider that replaces a default command with a custom command.
+
 
 <!-- default file list -->
 ## Files to Look At
