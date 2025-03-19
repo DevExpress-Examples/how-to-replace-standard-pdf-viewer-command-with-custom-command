@@ -8,7 +8,7 @@
     Name="win"
     Title="MainWindow"
     Width="1000"
-    Height="650">
+    Height="600">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <pdfViewer:PdfViewerControl x:Name="pdfViewer" DocumentSource="{Binding Path}">
+        <pdfViewer:PdfViewerControl x:Name="pdfViewer" DocumentSource="Demo.pdf">
 
             <pdfViewer:PdfViewerControl.CommandProvider>
                 <local:CustomPdfCommandProvider />

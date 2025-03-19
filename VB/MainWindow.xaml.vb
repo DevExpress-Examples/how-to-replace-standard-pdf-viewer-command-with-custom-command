@@ -13,14 +13,14 @@ Namespace DXSample
         Inherits DevExpress.Xpf.Core.ThemedWindow
 
         Public Sub New()
-            Me.InitializeComponent()
+            InitializeComponent()
         End Sub
     End Class
 
     Public Class CustomPdfCommandProvider
         Inherits DevExpress.Xpf.PdfViewer.PdfCommandProvider
 
-        Private ReadOnly factors As System.Collections.Generic.List(Of Double) = New System.Collections.Generic.List(Of Double) From {0.15, 0.3, 0.45, 1, 1.25, 1.5, 2, 5}
+        Private ReadOnly factors As List(Of Double) = New List(Of Double) From {0.15, 0.3, 0.45, 1, 1.25, 1.5, 2, 5}
 
         Public ReadOnly Property Control As PdfViewerControl
             Get
@@ -28,23 +28,23 @@ Namespace DXSample
             End Get
         End Property
 
-        Private zoomInCommandInternalField As System.Windows.Input.ICommand
+        Private zoomInCommandInternalField As ICommand
 
         Protected Overrides ReadOnly Property ZoomInCommandInternal As ICommand
             Get
                 Return If(Me.zoomInCommandInternalField, Function()
-                    Me.zoomInCommandInternalField = New DevExpress.Mvvm.DelegateCommand(AddressOf Me.ZoomIn, AddressOf Me.CanZoomIn)
+                    Me.zoomInCommandInternalField = New DevExpress.Mvvm.DelegateCommand(AddressOf ZoomIn, AddressOf CanZoomIn)
                     Return Me.zoomInCommandInternalField
                 End Function())
             End Get
         End Property
 
-        Private zoomOutCommandInternalField As System.Windows.Input.ICommand
+        Private zoomOutCommandInternalField As ICommand
 
         Protected Overrides ReadOnly Property ZoomOutCommandInternal As ICommand
             Get
                 Return If(Me.zoomOutCommandInternalField, Function()
-                    Me.zoomOutCommandInternalField = New DevExpress.Mvvm.DelegateCommand(AddressOf Me.ZoomOut, AddressOf Me.CanZoomOut)
+                    Me.zoomOutCommandInternalField = New DevExpress.Mvvm.DelegateCommand(AddressOf ZoomOut, AddressOf CanZoomOut)
                     Return Me.zoomOutCommandInternalField
                 End Function())
             End Get
@@ -80,17 +80,17 @@ Namespace DXSample
 
         Protected Overrides Function CreateZoomModeAndZoomFactorItem(ByVal dllName As String) As ICommand
             Dim items = Me.CreateZoomModeAndFactorsItems()
-            Dim setZoomModeAndFactor As DevExpress.Xpf.DocumentViewer.CommandCheckItems = New DevExpress.Xpf.DocumentViewer.CommandCheckItems With {.Caption = DevExpress.Xpf.DocumentViewer.DocumentViewerLocalizer.GetString(DevExpress.Xpf.DocumentViewer.DocumentViewerStringId.CommandZoomCaption), .Hint = DevExpress.Xpf.DocumentViewer.DocumentViewerLocalizer.GetString(DevExpress.Xpf.DocumentViewer.DocumentViewerStringId.CommandZoomDescription), .Group = DevExpress.Xpf.DocumentViewer.DocumentViewerLocalizer.GetString(DevExpress.Xpf.DocumentViewer.DocumentViewerStringId.ZoomRibbonGroupCaption), .Command = New DevExpress.Mvvm.DelegateCommand(Sub()
-            End Sub, Function() items.Any(Function(x) x.CanExecute(Nothing))), .Items = items, .SmallGlyph = DevExpress.Xpf.DocumentViewer.UriHelper.GetUri(dllName, "\Images\Zoom_16x16.png"), .LargeGlyph = DevExpress.Xpf.DocumentViewer.UriHelper.GetUri(dllName, "\Images\Zoom_32x32.png")}
+            Dim setZoomModeAndFactor As DevExpress.Xpf.DocumentViewer.CommandCheckItems = New DevExpress.Xpf.DocumentViewer.CommandCheckItems With {.Caption = DevExpress.Xpf.DocumentViewer.DocumentViewerLocalizer.GetString(DevExpress.Xpf.DocumentViewer.DocumentViewerStringId.CommandZoomCaption), .Hint = DevExpress.Xpf.DocumentViewer.DocumentViewerLocalizer.GetString(DevExpress.Xpf.DocumentViewer.DocumentViewerStringId.CommandZoomDescription), .Group = DevExpress.Xpf.DocumentViewer.DocumentViewerLocalizer.GetString(DevExpress.Xpf.DocumentViewer.DocumentViewerStringId.ZoomRibbonGroupCaption), .Command = New DevExpress.Mvvm.DelegateCommand(Function()
+            End Function, Function() items.Any(Function(x) x.CanExecute(Nothing))), .Items = items, .SmallGlyph = DevExpress.Xpf.DocumentViewer.UriHelper.GetUri(dllName, "\Images\Zoom_16x16.png"), .LargeGlyph = DevExpress.Xpf.DocumentViewer.UriHelper.GetUri(dllName, "\Images\Zoom_32x32.png")}
             Return setZoomModeAndFactor
         End Function
 
         Private Function CreateZoomModeAndFactorsItems() As ObservableCollection(Of DevExpress.Xpf.DocumentViewer.CommandToggleButton)
-            Dim zoomModeAndFactorsItems As System.Collections.ObjectModel.ObservableCollection(Of DevExpress.Xpf.DocumentViewer.CommandToggleButton) = New System.Collections.ObjectModel.ObservableCollection(Of DevExpress.Xpf.DocumentViewer.CommandToggleButton)()
-            Dim setZoomFactorCommand As DevExpress.Mvvm.DelegateCommand(Of Double) = New DevExpress.Mvvm.DelegateCommand(Of Double)(Sub(x)
+            Dim zoomModeAndFactorsItems As ObservableCollection(Of DevExpress.Xpf.DocumentViewer.CommandToggleButton) = New ObservableCollection(Of DevExpress.Xpf.DocumentViewer.CommandToggleButton)()
+            Dim setZoomFactorCommand As DevExpress.Mvvm.DelegateCommand(Of Double) = New DevExpress.Mvvm.DelegateCommand(Of Double)(Function(x)
                 Me.SetZoomFactorCommandInternal.Execute(x)
                 Me.UpdateZoomCommand()
-            End Sub, Function(x) Me.SetZoomFactorCommandInternal.CanExecute(x))
+            End Function, Function(x) Me.SetZoomFactorCommandInternal.CanExecute(x))
             zoomModeAndFactorsItems.Add(New DevExpress.Xpf.DocumentViewer.CommandSetZoomFactorAndModeItem With {.Caption = "15%", .Command = New DevExpress.Xpf.DocumentViewer.CommandWrapper(Function() setZoomFactorCommand), .ZoomFactor = 0.15, .GroupIndex = 1})
             zoomModeAndFactorsItems.Add(New DevExpress.Xpf.DocumentViewer.CommandSetZoomFactorAndModeItem With {.Caption = "30%", .Command = New DevExpress.Xpf.DocumentViewer.CommandWrapper(Function()(setZoomFactorCommand)), .ZoomFactor = 0.3, .GroupIndex = 1})
             zoomModeAndFactorsItems.Add(New DevExpress.Xpf.DocumentViewer.CommandSetZoomFactorAndModeItem With {.Caption = "45%", .Command = New DevExpress.Xpf.DocumentViewer.CommandWrapper(Function() setZoomFactorCommand), .ZoomFactor = 0.45, .GroupIndex = 1})
@@ -105,7 +105,7 @@ Namespace DXSample
         Private Sub UpdateZoomCommand()
             Dim zoomCommand As DevExpress.Xpf.DocumentViewer.CommandCheckItems = TryCast(Me.ZoomCommand, DevExpress.Xpf.DocumentViewer.CommandCheckItems)
             If zoomCommand Is Nothing Then Return
-            zoomCommand.UpdateCheckState(New Global.System.Func(Of Global.DevExpress.Xpf.DocumentViewer.CommandToggleButton, System.Boolean)(AddressOf Me.UpdateZoomFactorCheckState))
+            zoomCommand.UpdateCheckState(New Global.System.Func(Of Global.DevExpress.Xpf.DocumentViewer.CommandToggleButton, System.Boolean)(AddressOf UpdateZoomFactorCheckState))
         End Sub
     End Class
 End Namespace
