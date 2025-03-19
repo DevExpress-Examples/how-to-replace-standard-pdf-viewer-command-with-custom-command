@@ -8,7 +8,8 @@ using DevExpress.Xpf.DocumentViewer;
 using DevExpress.Xpf.PdfViewer;
 
 namespace DXSample {
-    public partial class MainWindow : Window {
+    public partial class MainWindow : DevExpress.Xpf.Core.ThemedWindow
+    {
 
         public MainWindow() {
             InitializeComponent();

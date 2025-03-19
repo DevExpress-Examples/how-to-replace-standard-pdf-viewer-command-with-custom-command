@@ -10,7 +10,7 @@ Imports DevExpress.Xpf.PdfViewer
 Namespace DXSample
 
     Public Partial Class MainWindow
-        Inherits System.Windows.Window
+        Inherits DevExpress.Xpf.Core.ThemedWindow
 
         Public Sub New()
             Me.InitializeComponent()

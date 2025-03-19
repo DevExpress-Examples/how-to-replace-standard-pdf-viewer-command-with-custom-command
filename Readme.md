@@ -4,28 +4,23 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 [![](https://img.shields.io/badge/💬_Leave_Feedback-feecdd?style=flat-square)](#does-this-example-address-your-development-requirementsobjectives)
 <!-- default badges end -->
-#  How to replace a standard PDF Viewer control command with a custom command
+#  WPF PDF Viewer - Replace a Standard PDF Viewer Command with a Custom Command
 
-This example shows how to modify the existing PDF Viewer command functionality to zoom to a custom zoom factor.
+This example modifies the existing PDF Viewer command to zoom a document to a custom zoom factor.
 
-All commands in the PDF Viewer are created using a command provider represented by the <a href="https://documentation.devexpress.com/WPF/DevExpress.Xpf.PdfViewer.PdfCommandProvider.class">PdfCommandProvider</a>  class. You can substitute the default command provider with its descendant to create a custom command in place of the default command.
+The [PdfCommandProvider](https://documentation.devexpress.com/WPF/DevExpress.Xpf.PdfViewer.PdfCommandProvider.class) class contains all commands in the PDF Viewer. You can create a descendant of the default command provider that replaces a default command with a custom command.
 
-Follow the steps below.
+<!-- default file list -->
+## Files to Look At
 
-1. Create a custom command provider class inherited from the <a href="https://documentation.devexpress.com/WPF/DevExpress.Xpf.PdfViewer.PdfCommandProvider.class">PdfCommandProvider</a>  class. You need to override the required members (e.g., the **ZoomInCommandInternal** property) to create an instance of the **DelegateCommand** class.  
+* [MainWindow.xaml](./CS/MainWindow.xaml) (VB: [MainWindow.xaml](./VB/MainWindow.xaml))
+* [MainWindow.xaml.cs](./CS/MainWindow.xaml.cs) (VB: [MainWindow.xaml.vb](./VB/MainWindow.xaml.vb))
+<!-- default file list end -->
 
-The delegate command constructor accepts **ZoomIn** and **CanZoomIn** delegates. The delegate command calls these delegates when the command's logic is invoked.
+## Documentation
 
-2. Implement the command logic in the **ZoomIn** and **CanZoomIn** methods.
+- [PdfCommandProvider](https://documentation.devexpress.com/WPF/DevExpress.Xpf.PdfViewer.PdfCommandProvider.class)
 
-3. Use the created **CustomPdfCommandProvider** to substitute the default command provider.
-
-See the following files for implementation details:
-
-CS | VB
------------- | -------------
-[MainWindow.xaml](./CS/MainWindow.xaml) | [MainWindow.xaml](./VB/MainWindow.xaml)
-[MainWindow.xaml.cs](./CS/MainWindow.xaml.cs) | [MainWindow.xaml.vb](./VB/MainWindow.xaml.vb)
 <!-- feedback -->
 ## Does this example address your development requirements/objectives?
 

@@ -1,4 +1,10 @@
 Imports System.Windows
+Imports System.Collections.Generic
+Imports System.Configuration
+Imports System.Data
+Imports System.Linq
+Imports System.Threading.Tasks
+Imports System
 
 Namespace DXSample
 
@@ -7,12 +13,5 @@ Namespace DXSample
     ''' </summary>
     Public Partial Class App
         Inherits Application
-
-        Public Sub New()
-        End Sub
-
-        Protected Overrides Sub OnStartup(ByVal e As StartupEventArgs)
-            MyBase.OnStartup(e)
-        End Sub
     End Class
 End Namespace
